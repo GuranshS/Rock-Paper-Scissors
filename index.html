@@ -20,7 +20,10 @@
         }
 
         function playRound(PlayerChoice,ComputerChoice){
-            if (PlayerChoice=="Rock" && ComputerChoice=="Scissor"){
+            if (PlayerChoice==ComputerChoice){
+                return "Draw";
+            }
+            else if (PlayerChoice=="Rock" && ComputerChoice=="Scissor"){
                 return "You win";
             }
             else if(PlayerChoice=="Scissor" && ComputerChoice=="Paper"){
@@ -34,17 +37,17 @@
             }
         }
 
-        function game {
+        function game(){
             for(i=0;i<5;i++){
                 const ComputerChoice = getComputerChoice();
                 const PlayerChoice = getPlayerChoice();
                 console.log("Your Choice:" + PlayerChoice + "\nOpponent Choice: "+ComputerChoice);
-                playRound(PlayerChoice, ComputerChoice);
+                console.log(playRound(PlayerChoice, ComputerChoice));
             }
         }
 
-        
-
+    game();        
+//Value for computer choices look a little sussy. Run that shit through a debugger
     </script>
 </body>
 </html>

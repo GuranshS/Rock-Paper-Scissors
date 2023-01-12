@@ -1,37 +1,28 @@
 const choices = ["rock", "paper", "scissor"];
+let pScore = 0;
+let cScore = 0;
 
-        function getPlayerChoice(){
-            const buttons= document.querySelectorAll("input");
-            buttons.forEach(button=>button.addEventListener("click", function(){
-                return button.value;
-            }))
-        }
+const buttons= document.querySelectorAll("button");
+buttons.forEach(button=>button.addEventListener("click", function(){
+console.log(playRound(this.dataset.value));
+    }));
 
-        function playRound(PlayerChoice,ComputerChoice){
-            if (PlayerChoice==ComputerChoice){
-                return "Draw";
-            }
-            else if (PlayerChoice=="rock" && ComputerChoice=="scissor"){
-                return "You win";
-            }
-            else if(PlayerChoice=="scissor" && ComputerChoice=="paper"){
-                return "You win";
-            }
-            else if(PlayerChoice=="paper" && ComputerChoice=="rock"){
-                return "You win";
-            }
-            else{
-                return "You lose";
-            }
-        }
+function playRound(PlayerChoice){
+    let ComputerChoice = choices[Math.floor(Math.random()*3)];
+    let result = "Your Choice:" + PlayerChoice + "\nOpponent Choice: "+ComputerChoice + "\nYour Score: "
+    + pScore + "\nComputer Score: "+ cScore;
 
-        function game(){
-            for(i=0;i<5;i++){
-                let ComputerChoice = choices[Math.floor(Math.random()*3)];
-                const PlayerChoice = getPlayerChoice();
-                console.log("Your Choice:" + PlayerChoice + "\nOpponent Choice: "+ComputerChoice);
-                console.log(playRound(PlayerChoice, ComputerChoice));
-            }
-        }
-
-    game(); 
+    if (PlayerChoice==ComputerChoice){
+        return "Draw\n"+ result;
+    }
+    else if ((PlayerChoice=="rock" && ComputerChoice=="scissor")||(PlayerChoice
+        =="scissor" && ComputerChoice=="paper")||(PlayerChoice=="paper" && 
+        ComputerChoice=="rock")){
+        pScore++;
+        return "You win\n" + result;
+    }
+    else{
+        cScore++;
+        return "You lose\n" + result;
+    }
+}

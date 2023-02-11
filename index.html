@@ -1,53 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Rock Paper Scissors</title>
+    <script src="rps.js" defer></script>
 </head>
+
 <body>
-    <script>
-        const choices = ["Rock", "Paper", "Scissor"];
+    <div class="game">
 
-        function getComputerChoice(){
-            return choices[Math.floor(Math.random()*3)];
-        }
+    <div class="button-panel">
+        <button data-value="Rock">Rock</button>
+        <button data-value="Paper">Paper</button>
+        <button data-value="Scissor">Scissor</button>
+    </div>
+    <div class="scoreboard">
 
-        function getPlayerChoice(){
-            let choice = window.prompt();
-            return choice;
-        }
-
-        function playRound(PlayerChoice,ComputerChoice){
-            if (PlayerChoice==ComputerChoice){
-                return "Draw";
-            }
-            else if (PlayerChoice=="Rock" && ComputerChoice=="Scissor"){
-                return "You win";
-            }
-            else if(PlayerChoice=="Scissor" && ComputerChoice=="Paper"){
-                return "You win";
-            }
-            else if(PlayerChoice=="Paper" && ComputerChoice=="Rock"){
-                return "You win";
-            }
-            else{
-                return "You lose";
-            }
-        }
-
-        function game(){
-            for(i=0;i<5;i++){
-                const ComputerChoice = getComputerChoice();
-                const PlayerChoice = getPlayerChoice();
-                console.log("Your Choice:" + PlayerChoice + "\nOpponent Choice: "+ComputerChoice);
-                console.log(playRound(PlayerChoice, ComputerChoice));
-            }
-        }
-
-    game();        
-//Value for computer choices look a little sussy. Run that shit through a debugger
-    </script>
+    </div>
+</div>
 </body>
+
 </html>

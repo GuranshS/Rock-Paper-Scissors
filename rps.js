@@ -3,56 +3,42 @@ let pScore = 0;
 let cScore = 0;
 
 const buttons= document.querySelectorAll("button");
-buttons.forEach(button=>button.addEventListener("click", function(){
-    const board = document.querySelector(".scoreboard");
-    board.innerText = playRound(this.dataset.value);
-    console.log(playRound(this.dataset.value));
-    }));
+buttons.forEach(button=>{
+    button.addEventListener('click', function(){
+        const board = document.querySelector(".scoreboard");
+        board.innerText = playRound(button.dataset.value);    })
+})
 
-function restart(){
-    const buttons= document.querySelectorAll("button");
-        buttons.forEach(button=>button.addEventListener("click", function(){
-            const board = document.querySelector(".scoreboard");
-            board.innerText = playRound(this.dataset.value);
-            if(!this.dataset.value=="again"){
-                this.disabled = false;
-            }
-        }));
+
+function disableButtons() {
+    buttons.forEach(button=>{
+        button.disabled = true;
+    })
 }
+
 function playRound(PlayerChoice){
     let ComputerChoice = choices[Math.floor(Math.random()*3)];
-    let result = "Your Choice: " + PlayerChoice + "\nOpponent Choice: "+ComputerChoice + "\nYour Score: "
-    + pScore + "\nComputer Score: "+ cScore;
     
-    if (PlayerChoice=="again"){
-        restart();
-        return "You get a second chance";
-
-    }
-    else if (pScore>5 || cScore>5){
-        const buttons= document.querySelectorAll("button");
-        pScore=0;
-        cScore=0;
-        buttons.forEach(button=>button.addEventListener("click", function(){
-        if(!this.dataset.value=="again"){
-            this.disabled = true;
-        }
-        }));
-        return "Press try again to restart"
-    }
-    else { 
-    if (PlayerChoice==ComputerChoice){
-        return "Draw\n"+ result;
+    if (pScore==5 || cScore==5){
+        disableButtons()
+        return "Refresh Page to play again";
     }
     else if ((PlayerChoice=="Rock" && ComputerChoice=="Scissor")||(PlayerChoice
         =="Scissor" && ComputerChoice=="Paper")||(PlayerChoice=="Paper" && 
         ComputerChoice=="Rock")){
         pScore++;
-        return "You win\n" + result;
+        return "You win\n" + "Your Choice: " + PlayerChoice + "\nOpponent Choice: "+ComputerChoice + "\nYour Score: "
+        + pScore + "\nComputer Score: "+ cScore;;
     }
+    else if (PlayerChoice==ComputerChoice){
+        return "Draw\n"+ "Your Choice: " + PlayerChoice + "\nOpponent Choice: "+ComputerChoice + "\nYour Score: "
+        + pScore + "\nComputer Score: "+ cScore;;
+    }
+    
     else{
         cScore++;
-        return "You lose\n" + result;
+        return "You lose\n" + "Your Choice: " + PlayerChoice + "\nOpponent Choice: "+ComputerChoice + "\nYour Score: "
+        + pScore + "\nComputer Score: "+ cScore;;
     }
-    }
+    
 }
